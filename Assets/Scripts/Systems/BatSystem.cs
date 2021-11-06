@@ -3,6 +3,7 @@ using Physics.Components;
 using Physics.Systems;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Transforms;
 
 namespace Systems
 {
@@ -28,7 +29,7 @@ namespace Systems
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
             Entities.WithAll<BatComponent, StatefulCollisionEvent>()
-                .ForEach((Entity batEntity, int entityInQueryIndex, in DynamicBuffer<StatefulCollisionEvent> events) =>
+                .ForEach((Entity batEntity, int entityInQueryIndex, in Translation translation, in DynamicBuffer<StatefulCollisionEvent> events) =>
                 {
                     foreach (var collisionEvent in events)
                     {
@@ -40,7 +41,13 @@ namespace Systems
                             continue;
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
-                        ecb.AddComponent<ToKillComponent>(entityInQueryIndex, batEntity);
+                        ecb.AddComponent<BatFlyComponent>(entityInQueryIndex, batEntity);
+                        var boxFlyEntity = ecb.CreateEntity(entityInQueryIndex);
+                        ecb.AddComponent<BoxFlyComponent>(entityInQueryIndex, boxFlyEntity);
+                        ecb.SetComponent(entityInQueryIndex, boxFlyEntity, new BoxFlyComponent
+                        {
+                            Value = translation.Value
+                        });
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
                         ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
                         break;

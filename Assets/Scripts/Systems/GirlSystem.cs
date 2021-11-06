@@ -3,6 +3,7 @@ using Physics.Components;
 using Physics.Systems;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Transforms;
 
 namespace Systems
 {
@@ -19,7 +20,6 @@ namespace Systems
             RequireSingletonForUpdate<ScoreComponent>();
             _ecbSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             _collisionSystem = World.GetOrCreateSystem<StatefulCollisionEventsSystem>();
-            // RequireSingletonForUpdate<CameraTarget>();
         }
 
         protected override void OnUpdate()
@@ -28,9 +28,8 @@ namespace Systems
             var scoreEntity = GetSingletonEntity<ScoreComponent>();
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
-            // var cameraTargetEntity = GetSingletonEntity<CameraTarget>();
             Entities.WithAll<GirlComponent, StatefulCollisionEvent>()
-                .ForEach((Entity girlEntity, int entityInQueryIndex, in DynamicBuffer<StatefulCollisionEvent> events) =>
+                .ForEach((Entity girlEntity, int entityInQueryIndex, in Translation translation, in DynamicBuffer<StatefulCollisionEvent> events) =>
                 {
                     foreach (var collisionEvent in events)
                     {
@@ -42,10 +41,14 @@ namespace Systems
                             continue;
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
-                        ecb.AddComponent<ToKillComponent>(entityInQueryIndex, girlEntity);
+                        var girlRunEntity = ecb.CreateEntity(entityInQueryIndex);
+                        ecb.AddComponent<GirlRunComponent>(entityInQueryIndex, girlRunEntity);
+                        ecb.SetComponent(entityInQueryIndex, girlRunEntity, new GirlRunComponent
+                        {
+                            Value = translation.Value
+                        });
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
                         ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
-                        // ecb.DestroyEntity(entityInQueryIndex, cameraTargetEntity);
                         break;
                     }
                 }).ScheduleParallel();

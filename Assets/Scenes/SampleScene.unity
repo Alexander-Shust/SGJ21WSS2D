@@ -426,6 +426,8 @@ MonoBehaviour:
   prefabs:
   - {fileID: 2986617805699189718, guid: 650d9b44c4a23ff4392ab60b131fea6e, type: 3}
   - {fileID: 6053112570986996340, guid: 0748d69f88eb70648baad12556bb9745, type: 3}
+  - {fileID: 3585161082658372158, guid: 4d3a41ba7d6a8804b895bbb8eadb6db0, type: 3}
+  - {fileID: 2842466929271173377, guid: 7ff3dce7e4544ac4f981bc19635eddd4, type: 3}
 --- !u!114 &257256924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,12 +522,22 @@ MonoBehaviour:
   TrapBonus: 50
   EndBonus: 100
   PlayerSpeed: 2
+  BatSpeed: 2.5
+  GirlSpeed: 2.5
   CarStop:
     x: 1
     y: 3.5
     z: 0
   PlayerSpawnPoint:
     x: 2
+    y: 2
+    z: 0
+  BatStop:
+    x: -5
+    y: -5
+    z: 0
+  GirlStop:
+    x: 5
     y: 2
     z: 0
 --- !u!114 &372798764
@@ -839,6 +851,7 @@ GameObject:
   - component: {fileID: 794524999}
   - component: {fileID: 794524998}
   - component: {fileID: 794525001}
+  - component: {fileID: 794525002}
   m_Layer: 0
   m_Name: Girl
   m_TagString: Untagged
@@ -1173,6 +1186,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c8d2078f4f4ba0b854d31572659647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &794525002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794524992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf57d0ec4e842a389182afcf8611dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &904398015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1215,7 @@ GameObject:
   - component: {fileID: 904398019}
   - component: {fileID: 904398018}
   - component: {fileID: 904398017}
+  - component: {fileID: 904398025}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -1524,6 +1550,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &904398025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904398015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf57d0ec4e842a389182afcf8611dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047212064
 GameObject:
   m_ObjectHideFlags: 0
