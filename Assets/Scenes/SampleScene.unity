@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 2
+  HasBox: 0
 --- !u!114 &1458511608
 MonoBehaviour:
   m_ObjectHideFlags: 0

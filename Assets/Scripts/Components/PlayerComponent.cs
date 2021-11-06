@@ -6,5 +6,6 @@ namespace Components
     public struct PlayerComponent : IComponentData
     {
         public float MovementSpeed;
+        public bool HasBox;
     }
 }
