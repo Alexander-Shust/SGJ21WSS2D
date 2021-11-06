@@ -17,7 +17,7 @@ namespace Systems
         {
             EntityManager.DestroyEntity(GetSingletonEntity<GameOverComponent>());
             var aliveTraps = 0;
-            Entities.WithAll<GirlComponent>()
+            Entities.WithAll<TrapComponent>()
                 .ForEach((Entity trapEntity) =>
                 {
                     ++aliveTraps;

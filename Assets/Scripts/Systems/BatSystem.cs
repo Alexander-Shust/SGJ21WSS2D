@@ -8,7 +8,7 @@ namespace Systems
 {
     [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     [UpdateAfter(typeof(StatefulCollisionEventsSystem))]
-    public class BoxPickupSystem : SystemBase
+    public class BatSystem : SystemBase
     {
         private EndSimulationEntityCommandBufferSystem _ecbSystem;
         private StatefulCollisionEventsSystem _collisionSystem;
@@ -27,25 +27,22 @@ namespace Systems
             var scoreEntity = GetSingletonEntity<ScoreComponent>();
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
-            Entities.WithAll<BoxComponent, StatefulCollisionEvent>()
-                .ForEach((Entity boxEntity, int entityInQueryIndex, in DynamicBuffer<StatefulCollisionEvent> events) =>
+            Entities.WithAll<BatComponent, StatefulCollisionEvent>()
+                .ForEach((Entity batEntity, int entityInQueryIndex, in DynamicBuffer<StatefulCollisionEvent> events) =>
                 {
                     foreach (var collisionEvent in events)
                     {
                         if (collisionEvent.CollidingState != EventCollidingState.BeginColliding)
                             continue;
-                        var playerEntity = collisionEvent.GetOtherEntity(boxEntity);
-                        if (!HasComponent<PlayerComponent>(playerEntity))
-                            continue;
+                        var playerEntity = collisionEvent.GetOtherEntity(batEntity);
                         var playerComponent = GetComponent<PlayerComponent>(playerEntity);
-                        if (playerComponent.HasBox)
+                        if (!playerComponent.HasBox)
                             continue;
-                        playerComponent.HasBox = true;
+                        playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
-                        if (!HasComponent<CarComponent>(boxEntity)) 
-                            ecb.DestroyEntity(entityInQueryIndex, boxEntity);
+                        ecb.AddComponent<ToKillComponent>(entityInQueryIndex, batEntity);
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
-                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.BoxPickupBonus});
+                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
                         break;
                     }
                 }).ScheduleParallel();

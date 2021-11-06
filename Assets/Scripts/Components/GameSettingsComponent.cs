@@ -1,4 +1,5 @@
 ﻿using Unity.Entities;
+using Unity.Mathematics;
 
 namespace Components
 {
@@ -7,7 +8,10 @@ namespace Components
     {
         public float StartingScore;
         public float BoxPickupBonus;
-        public float GirlBonus;
+        public float TrapBonus;
         public float EndBonus;
+        public float PlayerSpeed;
+        public float3 CarStop;
+        public float3 PlayerSpawnPoint;
     }
 }

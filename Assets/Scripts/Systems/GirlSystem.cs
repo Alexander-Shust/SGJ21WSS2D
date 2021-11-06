@@ -44,7 +44,7 @@ namespace Systems
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
                         ecb.AddComponent<ToKillComponent>(entityInQueryIndex, girlEntity);
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
-                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.GirlBonus});
+                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
                         // ecb.DestroyEntity(entityInQueryIndex, cameraTargetEntity);
                         break;
                     }
