@@ -8,7 +8,7 @@ namespace Systems
 {
     [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     [UpdateAfter(typeof(StatefulCollisionEventsSystem))]
-    public class HydrantSystem : SystemBase
+    public class SodaMachineSystem : SystemBase
     {
         private EndSimulationEntityCommandBufferSystem _ecbSystem;
         private StatefulCollisionEventsSystem _collisionSystem;
@@ -27,21 +27,21 @@ namespace Systems
             var scoreEntity = GetSingletonEntity<ScoreComponent>();
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
-            Entities.WithAll<HydrantComponent, StatefulCollisionEvent>()
-                .ForEach((Entity hydrantEntity, int entityInQueryIndex, in DynamicBuffer<StatefulCollisionEvent> events) =>
+            Entities.WithAll<SodaMachineComponent, StatefulCollisionEvent>()
+                .ForEach((Entity sodaMachineEntity, int entityInQueryIndex, in DynamicBuffer<StatefulCollisionEvent> events) =>
                 {
                     foreach (var collisionEvent in events)
                     {
                         if (collisionEvent.CollidingState != EventCollidingState.BeginColliding)
                             continue;
-                        var playerEntity = collisionEvent.GetOtherEntity(hydrantEntity);
+                        var playerEntity = collisionEvent.GetOtherEntity(sodaMachineEntity);
                         var playerComponent = GetComponent<PlayerComponent>(playerEntity);
                         if (!playerComponent.HasBox)
                             continue;
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
-                        var brokenHydrantEntity = ecb.CreateEntity(entityInQueryIndex);
-                        ecb.AddComponent<BrokenHydrantComponent>(entityInQueryIndex, brokenHydrantEntity);
+                        var brokenSodaMachineEntity = ecb.CreateEntity(entityInQueryIndex);
+                        ecb.AddComponent<BrokenSodaMachineComponent>(entityInQueryIndex, brokenSodaMachineEntity);
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
                         ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
                         break;
