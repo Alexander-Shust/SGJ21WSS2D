@@ -3797,7 +3797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8083488678832837504, guid: 753241fb6477e504eb62d672c764f640, type: 3}
       propertyPath: m_Material.m_CollidesWithCategories.m_Value.Category08
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8083488678832837504, guid: 753241fb6477e504eb62d672c764f640, type: 3}
       propertyPath: m_Material.m_CollidesWithCategories.m_Value.Category09
