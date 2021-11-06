@@ -15,6 +15,8 @@ namespace Systems
 
         protected override void OnCreate()
         {
+            RequireSingletonForUpdate<GameSettingsComponent>();
+            RequireSingletonForUpdate<ScoreComponent>();
             _ecbSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             _collisionSystem = World.GetOrCreateSystem<StatefulCollisionEventsSystem>();
             // RequireSingletonForUpdate<CameraTarget>();
@@ -22,6 +24,8 @@ namespace Systems
 
         protected override void OnUpdate()
         {
+            var settings = GetSingleton<GameSettingsComponent>();
+            var scoreEntity = GetSingletonEntity<ScoreComponent>();
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
             // var cameraTargetEntity = GetSingletonEntity<CameraTarget>();
@@ -39,6 +43,8 @@ namespace Systems
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
                         ecb.AddComponent<ToKillComponent>(entityInQueryIndex, girlEntity);
+                        var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
+                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.GirlBonus});
                         // ecb.DestroyEntity(entityInQueryIndex, cameraTargetEntity);
                         break;
                     }

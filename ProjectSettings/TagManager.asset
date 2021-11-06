@@ -8,6 +8,8 @@ TagManager:
   - QuitButton
   - LoseText
   - WinText
+  - Score
+  - HighScore
   layers:
   - Default
   - TransparentFX

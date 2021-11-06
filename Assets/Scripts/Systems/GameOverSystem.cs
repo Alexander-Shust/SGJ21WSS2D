@@ -10,6 +10,7 @@ namespace Systems
         protected override void OnCreate()
         {
             RequireSingletonForUpdate<GameOverComponent>();
+            RequireSingletonForUpdate<ScoreComponent>();
         }
 
         protected override void OnUpdate()
@@ -41,6 +42,16 @@ namespace Systems
         
         private void QuitClick()
         {
+            var highscore = PlayerPrefs.GetFloat("highscore");
+            var currentScore = GetSingleton<ScoreComponent>().Value;
+            if (currentScore > highscore)
+            {
+                PlayerPrefs.SetFloat("highscore", currentScore);
+                PlayerPrefs.Save();
+                var gameOverText = GameObject.FindWithTag("GameOver");
+                gameOverText.GetComponent<Text>().text = "Новый рекорд!";
+            }
+            
             Application.Quit();
         }
     }

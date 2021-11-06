@@ -15,12 +15,16 @@ namespace Systems
 
         protected override void OnCreate()
         {
+            RequireSingletonForUpdate<GameSettingsComponent>();
+            RequireSingletonForUpdate<ScoreComponent>();
             _ecbSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             _collisionSystem = World.GetOrCreateSystem<StatefulCollisionEventsSystem>();
         }
 
         protected override void OnUpdate()
         {
+            var settings = GetSingleton<GameSettingsComponent>();
+            var scoreEntity = GetSingletonEntity<ScoreComponent>();
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
             Entities.WithAll<FinishComponent, StatefulCollisionEvent>()
@@ -37,6 +41,8 @@ namespace Systems
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
                         ecb.AddComponent<ToKillComponent>(entityInQueryIndex, finishEntity);
+                        var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
+                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.EndBonus});
                         var newEntity = ecb.CreateEntity(entityInQueryIndex);
                         ecb.AddComponent<GameOverComponent>(entityInQueryIndex, newEntity);
                         break;

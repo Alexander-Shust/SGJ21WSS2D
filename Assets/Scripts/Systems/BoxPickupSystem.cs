@@ -15,12 +15,16 @@ namespace Systems
 
         protected override void OnCreate()
         {
+            RequireSingletonForUpdate<GameSettingsComponent>();
+            RequireSingletonForUpdate<ScoreComponent>();
             _ecbSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             _collisionSystem = World.GetOrCreateSystem<StatefulCollisionEventsSystem>();
         }
 
         protected override void OnUpdate()
         {
+            var settings = GetSingleton<GameSettingsComponent>();
+            var scoreEntity = GetSingletonEntity<ScoreComponent>();
             Dependency = JobHandle.CombineDependencies(_collisionSystem.OutDependency, Dependency);
             var ecb = _ecbSystem.CreateCommandBuffer().AsParallelWriter();
             Entities.WithAll<BoxComponent, StatefulCollisionEvent>()
@@ -37,6 +41,8 @@ namespace Systems
                         playerComponent.HasBox = true;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
                         ecb.DestroyEntity(entityInQueryIndex, boxEntity);
+                        var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
+                        ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.BoxPickupBonus});
                         break;
                     }
                 }).ScheduleParallel();
