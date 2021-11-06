@@ -38,7 +38,7 @@ namespace Systems
                             continue;
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
-                        ecb.DestroyEntity(entityInQueryIndex, girlEntity);
+                        ecb.AddComponent<ToKillComponent>(entityInQueryIndex, girlEntity);
                         // ecb.DestroyEntity(entityInQueryIndex, cameraTargetEntity);
                         break;
                     }

@@ -36,7 +36,7 @@ namespace Systems
                             continue;
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
-                        ecb.DestroyEntity(entityInQueryIndex, finishEntity);
+                        ecb.AddComponent<ToKillComponent>(entityInQueryIndex, finishEntity);
                         var newEntity = ecb.CreateEntity(entityInQueryIndex);
                         ecb.AddComponent<GameOverComponent>(entityInQueryIndex, newEntity);
                         break;
