@@ -1,6 +1,7 @@
 ﻿using Components;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -20,8 +21,11 @@ namespace Systems
             var y = Input.GetAxis("Vertical");
             
             Entities.WithAll<PlayerComponent>()
-                .ForEach((Entity playerEntity, ref Translation translation, in PlayerComponent playerComponent) =>
+                .ForEach((Entity playerEntity, ref Translation translation, ref Rotation rotation, ref PhysicsVelocity velocity, in PlayerComponent playerComponent) =>
                 {
+                    velocity.Angular = float3.zero;
+                    velocity.Linear = float3.zero;
+                    rotation.Value = quaternion.identity;
                     var animator = EntityManager.GetComponentObject<Animator>(playerEntity);
                     var hasBox = animator.GetBool("HasBox");
                     if (hasBox != playerComponent.HasBox)

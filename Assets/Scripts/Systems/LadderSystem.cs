@@ -3,6 +3,8 @@ using Physics.Components;
 using Physics.Systems;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Physics;
+using Unity.Physics.Authoring;
 using Unity.Transforms;
 
 namespace Systems
@@ -42,8 +44,9 @@ namespace Systems
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
                         ecb.RemoveComponent<LadderComponent>(entityInQueryIndex, ladderEntity);
-                        var playerFallEntity = ecb.CreateEntity(entityInQueryIndex);
-                        ecb.AddComponent<PlayerFallComponent>(entityInQueryIndex, playerFallEntity);
+                        ecb.RemoveComponent<PhysicsCollider>(entityInQueryIndex, ladderEntity);
+                        // var playerFallEntity = ecb.CreateEntity(entityInQueryIndex);
+                        // ecb.AddComponent<PlayerFallComponent>(entityInQueryIndex, playerFallEntity);
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
                         ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
                         break;

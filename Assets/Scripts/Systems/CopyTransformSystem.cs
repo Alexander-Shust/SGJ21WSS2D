@@ -13,7 +13,9 @@ namespace Systems
                 .ForEach((Entity entity, in LocalToWorld localToWorld) =>
                 {
                     var transform = EntityManager.GetComponentObject<Transform>(entity);
-                    transform.position = localToWorld.Position;
+                    var position = localToWorld.Position;
+                    position.z = 0.0f;
+                    transform.position = position;
                     transform.rotation = localToWorld.Rotation;
                 }).WithoutBurst().Run();
         }
