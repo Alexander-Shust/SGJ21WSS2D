@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NoBoxDownIdle
+  m_Name: GirlIdle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 3905727959567605692, guid: ad5349794921bfb47a59c5f3f258ffa7, type: 3}
+      value: {fileID: -5439765026384770559, guid: 685f32c34f45b974eaad3c710bf9ff45, type: 3}
     - time: 0.5
-      value: {fileID: 3905727959567605692, guid: ad5349794921bfb47a59c5f3f258ffa7, type: 3}
-    - time: 1
-      value: {fileID: 8568095109568728614, guid: ad5349794921bfb47a59c5f3f258ffa7, type: 3}
+      value: {fileID: -5859545116844290178, guid: 685f32c34f45b974eaad3c710bf9ff45, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,21 +42,20 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 3905727959567605692, guid: ad5349794921bfb47a59c5f3f258ffa7, type: 3}
-    - {fileID: 3905727959567605692, guid: ad5349794921bfb47a59c5f3f258ffa7, type: 3}
-    - {fileID: 8568095109568728614, guid: ad5349794921bfb47a59c5f3f258ffa7, type: 3}
+    - {fileID: -5439765026384770559, guid: 685f32c34f45b974eaad3c710bf9ff45, type: 3}
+    - {fileID: -5859545116844290178, guid: 685f32c34f45b974eaad3c710bf9ff45, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.25
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
     m_LoopTime: 1
-    m_LoopBlend: 1
+    m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
     m_LoopBlendPositionXZ: 0
