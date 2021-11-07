@@ -42,6 +42,8 @@ namespace Systems
                             continue;
                         playerComponent.HasBox = true;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
+                        var soundEntity = ecb.CreateEntity(entityInQueryIndex);
+                        ecb.AddComponent<PlayBoxPickupSound>(entityInQueryIndex, soundEntity);
                         if (!HasComponent<CarComponent>(boxEntity)) 
                             ecb.DestroyEntity(entityInQueryIndex, boxEntity);
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;

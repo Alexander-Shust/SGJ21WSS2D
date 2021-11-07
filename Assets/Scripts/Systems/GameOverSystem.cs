@@ -38,6 +38,9 @@ namespace Systems
             buttonQuit.GetComponent<Image>().enabled = true;
             buttonQuit.GetComponentInChildren<Text>().enabled = true;
             buttonQuit.GetComponent<Button>().onClick.AddListener(QuitClick);
+            var soundManager = GameObject.FindWithTag("AudioSource");
+            var musicPlayer = soundManager.GetComponent<AudioSource>();
+            musicPlayer.Stop();
         }
         
         private void QuitClick()

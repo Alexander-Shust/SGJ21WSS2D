@@ -2,6 +2,7 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Systems
 {
@@ -19,6 +20,9 @@ namespace Systems
             var boxPrefab = this.GetPrefab<FlyingBoxComponent>();
             if (boxPrefab == Entity.Null)
                 return;
+            var soundManager = GameObject.FindWithTag("AudioSource");
+            var failSounds = soundManager.GetComponent<FailSounds>();
+            failSounds.PlayRandomSound();
             this.ShowDialog("Стой! Это не тебе посылка...", 2.0f);
             var boxEntity = EntityManager.Instantiate(boxPrefab);
             EntityManager.SetComponentData(boxEntity, new Translation {Value = boxFlyComponent.Value});

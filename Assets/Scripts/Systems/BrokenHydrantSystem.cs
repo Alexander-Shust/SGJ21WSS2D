@@ -19,6 +19,9 @@ namespace Systems
             EntityManager.RemoveComponent<HydrantComponent>(hydrantEntity);
             var animator = EntityManager.GetComponentObject<Animator>(hydrantEntity);
             animator.SetBool("Broken", true);
+            var soundManager = GameObject.FindWithTag("AudioSource");
+            var hydrantSound = soundManager.GetComponent<HydrantSound>();
+            hydrantSound.PlaySound();
             this.ShowDialog("Свежачок! Жаль, посылка промокла.", 1.5f);
         }
     }

@@ -19,6 +19,9 @@ namespace Systems
             EntityManager.RemoveComponent<SodaMachineComponent>(sodaMachineEntity);
             var animator = EntityManager.GetComponentObject<Animator>(sodaMachineEntity);
             animator.SetBool("Broken", true);
+            var soundManager = GameObject.FindWithTag("AudioSource");
+            var failSounds = soundManager.GetComponent<FailSounds>();
+            failSounds.PlayRandomSound();
             this.ShowDialog("А-а-а! Посылка-то где?!", 1.5f);
         }
     }

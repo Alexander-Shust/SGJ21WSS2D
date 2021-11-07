@@ -13,6 +13,7 @@ TagManager:
   - Dialog
   - MyCanvas
   - Bubble
+  - AudioSource
   layers:
   - Default
   - TransparentFX

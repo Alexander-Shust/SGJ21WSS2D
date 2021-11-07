@@ -1,5 +1,6 @@
 ﻿using Components;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Systems
 {
@@ -13,8 +14,10 @@ namespace Systems
         protected override void OnUpdate()
         {
             EntityManager.DestroyEntity(GetSingletonEntity<MailBoxFullComponent>());
-            
-            this.ShowDialog("Работа мастера, впихнули невпихуемое! Продолжаем разговор...", 2.5f);
+            var soundManager = GameObject.FindWithTag("AudioSource");
+            var failSounds = soundManager.GetComponent<FailSounds>();
+            failSounds.PlayRandomSound();
+            this.ShowDialog("Впихнул! Стоп, это чужой ящик, а назад уже никак...", 2.5f);
         }
     }
 }
