@@ -31,6 +31,7 @@ namespace Systems
                         EntityManager.DestroyEntity(GetSingletonEntity<CarOnTheWay>());
                         EntityManager.CreateEntity(typeof(CarArrived));
                         EntityManager.AddComponent<ToKillComponent>(carEntity);
+                        this.ShowDialog("Приехали!");
                         return;
                     }
                     var delta = carComponent.MovementSpeed * deltaTime;

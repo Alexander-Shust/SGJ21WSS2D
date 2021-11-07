@@ -19,6 +19,7 @@ namespace Systems
             var boxPrefab = this.GetPrefab<FlyingBoxComponent>();
             if (boxPrefab == Entity.Null)
                 return;
+            this.ShowDialog("Стой! Это не тебе посылка...", 2.0f);
             var boxEntity = EntityManager.Instantiate(boxPrefab);
             EntityManager.SetComponentData(boxEntity, new Translation {Value = boxFlyComponent.Value});
             EntityManager.SetComponentData(boxEntity, new Rotation {Value = quaternion.identity});

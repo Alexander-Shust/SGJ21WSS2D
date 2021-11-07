@@ -44,9 +44,10 @@ namespace Systems
                         playerComponent.HasBox = false;
                         ecb.SetComponent(entityInQueryIndex, playerEntity, playerComponent);
                         ecb.RemoveComponent<LadderComponent>(entityInQueryIndex, ladderEntity);
+                        ecb.RemoveComponent<TrapComponent>(entityInQueryIndex, ladderEntity);
+                        var newEntity = ecb.CreateEntity(entityInQueryIndex);
+                        ecb.AddComponent<PlayerFallComponent>(entityInQueryIndex, newEntity);
                         ecb.RemoveComponent<PhysicsCollider>(entityInQueryIndex, ladderEntity);
-                        // var playerFallEntity = ecb.CreateEntity(entityInQueryIndex);
-                        // ecb.AddComponent<PlayerFallComponent>(entityInQueryIndex, playerFallEntity);
                         var currentScore = GetComponent<ScoreComponent>(scoreEntity).Value;
                         ecb.SetComponent(entityInQueryIndex, scoreEntity, new ScoreComponent {Value = currentScore + settings.TrapBonus});
                         break;

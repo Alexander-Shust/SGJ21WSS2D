@@ -29,6 +29,7 @@ namespace Systems
             var boxEntity = EntityManager.Instantiate(ballPrefab);
             EntityManager.SetComponentData(boxEntity, new Translation {Value = girlRunComponent.Value});
             EntityManager.SetComponentData(boxEntity, new Rotation {Value = quaternion.identity});
+            this.ShowDialog("Мячик, мячик-то забыла!", 1.5f);
         }
 
         public struct SpawnBallComponent : IComponentData
