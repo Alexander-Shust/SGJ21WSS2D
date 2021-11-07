@@ -14,7 +14,7 @@ namespace Systems
         {
             EntityManager.DestroyEntity(GetSingletonEntity<PlayerFallComponent>());
             
-            this.ShowDialog("Не дотягиваюсь... А что, если подставить посылку?", 2.0f);
+            this.ShowDialog("Не дотягиваюсь! А что, если подставить посылку?", 2.0f);
         }
     }
 }

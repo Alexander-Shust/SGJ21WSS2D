@@ -16,6 +16,7 @@ namespace Systems
             EntityManager.DestroyEntity(GetSingletonEntity<BrokenSodaMachineComponent>());
             var sodaMachineEntity = GetSingletonEntity<SodaMachineComponent>();
             EntityManager.RemoveComponent<TrapComponent>(sodaMachineEntity);
+            EntityManager.RemoveComponent<SodaMachineComponent>(sodaMachineEntity);
             var animator = EntityManager.GetComponentObject<Animator>(sodaMachineEntity);
             animator.SetBool("Broken", true);
             this.ShowDialog("А-а-а! Посылка-то где?!", 1.5f);

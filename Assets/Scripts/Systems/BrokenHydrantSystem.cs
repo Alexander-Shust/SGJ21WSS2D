@@ -16,6 +16,7 @@ namespace Systems
             EntityManager.DestroyEntity(GetSingletonEntity<BrokenHydrantComponent>());
             var hydrantEntity = GetSingletonEntity<HydrantComponent>();
             EntityManager.RemoveComponent<TrapComponent>(hydrantEntity);
+            EntityManager.RemoveComponent<HydrantComponent>(hydrantEntity);
             var animator = EntityManager.GetComponentObject<Animator>(hydrantEntity);
             animator.SetBool("Broken", true);
             this.ShowDialog("Свежачок! Жаль, посылка промокла.", 1.5f);

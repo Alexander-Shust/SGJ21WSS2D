@@ -28,6 +28,8 @@ namespace Systems
             var buttonQuit = GameObject.FindWithTag("QuitButton");
             buttonQuit.GetComponent<Image>().enabled = false;
             buttonQuit.GetComponentInChildren<Text>().enabled = false;
+            var bubble = GameObject.FindWithTag("Bubble");
+            bubble.GetComponent<RawImage>().enabled = false;
             var highScoreText = GameObject.FindWithTag("HighScore");
             var highScore = PlayerPrefs.GetFloat("highscore");
             highScoreText.GetComponent<Text>().text = ((int) highScore).ToString();

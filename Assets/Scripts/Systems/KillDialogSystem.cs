@@ -1,5 +1,9 @@
 ﻿using Components;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Systems
 {
@@ -17,6 +21,8 @@ namespace Systems
                     if (currentLifeTime <= 0)
                     {
                         EntityManager.DestroyEntity(dialogEntity);
+                        var bubble = GameObject.FindWithTag("Bubble");
+                        bubble.GetComponent<RawImage>().enabled = false;
                         return;
                     }
                     EntityManager.SetComponentData(dialogEntity, new DialogComponent {Value = currentLifeTime});
