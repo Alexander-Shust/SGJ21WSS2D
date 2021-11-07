@@ -6776,7 +6776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9116169347762133192, guid: 1893fb97480d6fd4d8a1b7194fd61a21, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9116169347762133196, guid: 1893fb97480d6fd4d8a1b7194fd61a21, type: 3}
       propertyPath: m_Pivot.x
@@ -41440,6 +41440,8 @@ Transform:
   - {fileID: 8044004886831295037}
   - {fileID: 8044004886872432720}
   - {fileID: 8044004885683287110}
+  - {fileID: 206350897}
+  - {fileID: 533135058}
   - {fileID: 1342976451}
   - {fileID: 52103917}
   - {fileID: 229077114}
@@ -41462,46 +41464,44 @@ Transform:
   - {fileID: 1136411649}
   - {fileID: 1066268961}
   - {fileID: 778350222}
+  - {fileID: 678068245}
   - {fileID: 312615933}
   - {fileID: 2022226362}
-  - {fileID: 1160536984}
+  - {fileID: 800033224}
+  - {fileID: 765511662}
   - {fileID: 8680597}
-  - {fileID: 533135058}
+  - {fileID: 1160536984}
+  - {fileID: 483828711}
   - {fileID: 1114863304}
   - {fileID: 966289063}
-  - {fileID: 1997462943}
-  - {fileID: 1654618582}
-  - {fileID: 2028833434}
-  - {fileID: 747465585}
-  - {fileID: 865505916}
-  - {fileID: 674091037}
-  - {fileID: 584107847}
-  - {fileID: 1794916553}
-  - {fileID: 1105249683}
-  - {fileID: 765511662}
-  - {fileID: 206350897}
-  - {fileID: 483828711}
-  - {fileID: 1555927752}
-  - {fileID: 1803492699}
   - {fileID: 818975243}
+  - {fileID: 1036066110}
   - {fileID: 846409385}
   - {fileID: 1936552462}
-  - {fileID: 1036066110}
-  - {fileID: 1509541781}
-  - {fileID: 800033224}
-  - {fileID: 678068245}
+  - {fileID: 1803492699}
+  - {fileID: 747465585}
+  - {fileID: 1997462943}
+  - {fileID: 865505916}
+  - {fileID: 2028833434}
+  - {fileID: 674091037}
+  - {fileID: 584107847}
   - {fileID: 89552730}
+  - {fileID: 1555927752}
   - {fileID: 254868735}
+  - {fileID: 1105249683}
   - {fileID: 730506082}
   - {fileID: 977764502}
+  - {fileID: 1654618582}
   - {fileID: 870393790}
   - {fileID: 1955392831}
   - {fileID: 1970481685}
+  - {fileID: 1509541781}
   - {fileID: 65343322}
   - {fileID: 579750800}
   - {fileID: 1449540524}
   - {fileID: 1309517963}
   - {fileID: 925687902}
+  - {fileID: 1794916553}
   - {fileID: 317042281}
   - {fileID: 1743143234}
   - {fileID: 1518111563}
